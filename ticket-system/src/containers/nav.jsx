@@ -31,6 +31,8 @@ let menuList = [
     }
 ];
 
+let userFullName = "Lukas Kondrotas";
+
 function NavTop() {
     return(
         <Navbar bg="dark" variant="dark">
@@ -45,7 +47,7 @@ function NavTop() {
                             <img src={avatar} alt="test" width="50" height="40"/>
                         </Dropdown.Toggle>
                         <Dropdown.Menu variant="dark">
-                            <Dropdown.Header>Lukas Kondrotas</Dropdown.Header>
+                            <Dropdown.Header>{userFullName}</Dropdown.Header>
                             <Dropdown.Divider />
                             <Dropdown.Item href="#">Profile</Dropdown.Item>
                             <Dropdown.Item href="#">Logout</Dropdown.Item>
