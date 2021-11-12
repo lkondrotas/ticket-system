@@ -1,6 +1,17 @@
+import {Container, Row, Col, ListGroup} from 'react-bootstrap';
+
 function sideMenu() {
     return (
-        <div>Test</div>
+        <Container fluid>
+            <Row bg="dark">
+                <Col xs={3} className="vh-100 bg-secondary">
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

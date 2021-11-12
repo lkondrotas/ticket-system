@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavTop from "./containers/nav";
 import SideMenu from "./containers/sideMenu";
 
+
 ReactDOM.render(
   <React.StrictMode>
     <NavTop />

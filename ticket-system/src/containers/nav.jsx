@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import avatar from './avatar.svg';
+import logo from '../images/logo.svg';
+import avatar from '../images/avatar.svg';
 import {Navbar, Container, Nav, NavItem, Dropdown} from 'react-bootstrap';
 
 let menuList = [
@@ -35,7 +35,7 @@ let userFullName = "Lukas Kondrotas";
 
 function NavTop() {
     return(
-        <Navbar bg="dark" variant="dark">
+        <Navbar fixed="top" bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="#home"><img src={logo} alt="test" className="d-inline-block align-top" width="40" height="40"/></Navbar.Brand>
                 <Nav className="me-auto">
