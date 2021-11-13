@@ -1,15 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import NavTop from "./containers/nav";
-import SideMenu from "./containers/sideMenu";
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavTop />
+    <App />
   </React.StrictMode>,
-  document.getElementById("nav")
+  document.getElementById('root')
 );
 
 ReactDOM.render(
@@ -18,4 +17,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("sideMenu")
 );
-
