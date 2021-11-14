@@ -1,6 +1,7 @@
-import {Container, Row} from 'react-bootstrap';
+import {Container, Row, Button} from 'react-bootstrap';
 import SideMenu from './sideMenu';
 import CollapsedSideMenu from './CollapsedSideMenu';
+import Main from './Main';
 import React from 'react';
 
 
@@ -14,20 +15,13 @@ class MainContainer extends React.Component {
         return( 
             <Container fluid>
                 <Row bg="dark">
-                    {this.state.data}
-                    {/* <Button onClick={this.state.isCollapsed ? this.expand : this.collapse }>Test</Button> to collapse and expand */}
+                    <SideMenu />
+                    <Main />
+                    {/* <Button onClick={this.state.isCollapsed ? this.expand : this.collapse }>Test</Button> */}
                 </Row>
             </Container>
         );
     }
-
-    collapse = () =>{
-        this.setState({isCollapsed: true, data: <SideMenu />})
-    }
-    expand = () =>{
-        this.setState({isCollapsed: false, data: <CollapsedSideMenu />})
-    }
-
 }
  
 export default MainContainer;

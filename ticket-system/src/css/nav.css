@@ -1,0 +1,40 @@
+.colExp {
+  position: absolute;
+  width: 30px;
+  top: 0;
+  bottom: 0;
+  right: 75%;
+  box-shadow: inset -5px 0 5px -4px rgba(64, 69, 74, 0.7);
+  background: linear-gradient(
+    90deg,
+    rgba(108, 117, 125, 1),
+    rgba(64, 69, 74, 1)
+  );
+  transform: scaleX(0.2);
+  transform-origin: right;
+  transition: 250ms;
+}
+
+.colExpHov:hover .colExp {
+  transform: scaleX(1);
+  transition: 250ms;
+}
+
+.colExp:hover {
+  width: 40px;
+  transition: 250ms;
+}
+
+.colExp .center {
+  transform: scaleX(0);
+  transform-origin: right;
+  color: white;
+  padding-top: 50vh;
+  padding-left: 2px;
+  transition: 250ms;
+}
+
+.colExpHov:hover .center {
+  transform: scaleX(1);
+  transition: 250ms;
+}
