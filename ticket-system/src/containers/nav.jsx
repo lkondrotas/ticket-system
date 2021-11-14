@@ -1,6 +1,6 @@
 import logo from '../images/logo.svg';
 import avatar from '../images/avatar.svg';
-import {Navbar, Container, Nav, NavItem, Dropdown} from 'react-bootstrap';
+import {Navbar, Container, Nav, Dropdown} from 'react-bootstrap';
 
 let menuList = [
     {

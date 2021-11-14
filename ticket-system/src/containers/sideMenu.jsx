@@ -1,4 +1,4 @@
-import {Container, Row, Col, ListGroup} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 
 function sideMenu() {
     return (
