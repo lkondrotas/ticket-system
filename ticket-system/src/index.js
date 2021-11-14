@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import NavTop from "./containers/nav";
-import SideMenu from "./containers/sideMenu";
-
+import MainContainer from "./containers/mainContainer";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +13,7 @@ ReactDOM.render(
 
 ReactDOM.render(
   <React.StrictMode>
-    <SideMenu />
+    <MainContainer />
   </React.StrictMode>,
-  document.getElementById("sideMenu")
+  document.getElementById("MainContainer")
 );

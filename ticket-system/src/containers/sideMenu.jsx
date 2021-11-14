@@ -1,18 +1,29 @@
-import {Container, Row, Col, ListGroup} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
+import React from 'react';
 
-function sideMenu() {
-    return (
-        <Container fluid>
-            <Row bg="dark">
-                <Col xs={3} className="vh-100 bg-secondary">
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    
-                </Col>
-            </Row>
-        </Container>
-    );
+class SideMenu extends React.Component {
+    render() { 
+     return (
+         <Col xs={3} className="vh-100 bg-secondary">
+             <br></br>
+             <br></br>
+             <br></br>          
+         </Col>
+     );
+    }
 }
+ 
+export default SideMenu;
 
-export default sideMenu;
+// function SideMenu() {
+//     return (
+//         <Col xs={3} className="vh-100 bg-secondary">
+//             <br></br>
+//             <br></br>
+//             <br></br>
+            
+//         </Col>
+//     );
+// }
+
+// export default SideMenu;
