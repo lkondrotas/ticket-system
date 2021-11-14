@@ -1,4 +1,4 @@
-import {Container, Row, Button} from 'react-bootstrap';
+import {Container, Row, Button, Collapse} from 'react-bootstrap';
 import SideMenu from './sideMenu';
 import CollapsedSideMenu from './CollapsedSideMenu';
 import Main from './Main';

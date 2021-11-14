@@ -12,7 +12,7 @@
   );
   transform: scaleX(0.2);
   transform-origin: right;
-  transition: 250ms;
+  transition: 400ms;
 }
 
 .colExpHov:hover .colExp {
@@ -36,5 +36,9 @@
 
 .colExpHov:hover .center {
   transform: scaleX(1);
+  transition: 250ms;
+}
+
+#sideMenu {
   transition: 250ms;
 }
