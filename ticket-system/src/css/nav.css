@@ -1,9 +1,6 @@
 .colExp {
-  position: absolute;
   width: 30px;
-  top: 0;
-  bottom: 0;
-  right: 75%;
+  height: 100vh;
   box-shadow: inset -5px 0 5px -4px rgba(64, 69, 74, 0.7);
   background: linear-gradient(
     90deg,
@@ -40,5 +37,14 @@
 }
 
 #sideMenu {
+  transition: 250ms;
+}
+
+.sideBar{
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  width: 60px;
+  height: 100vh;
+  transform-origin: left;
   transition: 250ms;
 }

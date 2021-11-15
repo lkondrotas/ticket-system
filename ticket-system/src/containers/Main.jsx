@@ -9,7 +9,7 @@ class Main extends React.Component {
 
     render() { 
         return (
-            <Col xs={this.state.colSize} className="vh-100">
+            <Col className="vh-100">
                 <br></br>
                 <br></br>
                 <br></br>
