@@ -1,39 +1,53 @@
-import {Col, Button, Collapse, Row} from 'react-bootstrap';
-import React from 'react';
-import '../css/nav.css'
-import arrow from '../images/arrow.svg';
+import { Col, Button, Collapse, Row, Fade } from "react-bootstrap";
+import React from "react";
+import "../css/nav.css";
+import arrow from "../images/arrow.svg";
 
 class SideMenu extends React.Component {
-    state = {
-        open: true,
-        openBar: false,
-    }
+  state = {
+    open: true,
+  };
 
-
-    render() { 
-     return (
-        <React.Fragment>
-         <Collapse onExiting={() => this.setState({openBar: true})} onEntered={() => this.setState({openBar: false})} in={this.state.open} aria-controls="sideMenu" aria-expanded={this.state.open} dimension="width">
-         <Col xs={3} id="sideMenu" className="vh-100 bg-secondary colExpHov">
-             <Row>
-             <Col>
-                 Test
-             </Col>
-             <Col xs="1">
-             <a href="#"><div onClick={() => this.setState({open: false})} className="colExp"><img src={arrow} className="center" /></div></a>
-            </Col>
+  render() {
+    return (
+      <React.Fragment>
+        <Col xs={3} className="vh-100  colExpHov">
+          <Collapse
+            in={this.state.open}
+            aria-controls="sideMenu"
+            aria-expanded={this.state.open}
+            dimension="width"
+          >
+            <Row className="bg-secondary" id="sideMenu">
+              <Col></Col>
+              <Col xs="1">
+                <a href="#sideMenu">
+                  <div
+                    onClick={() => this.setState({ open: false })}
+                    className="colExp"
+                  >
+                    <img src={arrow} alt="Arrow" className="center" />
+                  </div>
+                </a>
+              </Col>
             </Row>
-         </Col>
-         </Collapse>
-         <div className="sideBar" style={{transform: this.state.openBar ? "scaleX(1)" : "scaleX(0)"}}>
-             <br></br>
-             <br></br>
-             <br></br>
-             <Button onClick={() => this.setState({open: true})}></Button>
-         </div>
-         </React.Fragment>
-     );
-    }
+          </Collapse>
+        </Col>
+        <Fade
+          in={!this.state.open}
+          aria-controls="sideBar"
+          aria-expanded={!this.state.open}
+        >
+          <div id="sideBar">
+            <br></br>
+            <br></br>
+            <br></br>
+            <Button onClick={() => this.setState({ open: true })}></Button>
+          </div>
+        </Fade>
+      </React.Fragment>
+    );
+  }
 }
- 
+
 export default SideMenu;
