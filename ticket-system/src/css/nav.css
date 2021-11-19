@@ -1,49 +1,40 @@
-.colExp {
-  width: 30px;
-  height: 100vh;
-  box-shadow: inset -5px 0 5px -4px rgba(64, 69, 74, 0.7);
-  background: linear-gradient(
-    90deg,
-    rgba(108, 117, 125, 1),
-    rgba(64, 69, 74, 1)
-  );
-  transform: scaleX(0.2);
-  transform-origin: right;
-  transition: 400ms;
-}
-
-.colExpHov:hover .colExp {
-  transform: scaleX(1);
+.closeImage {
+  margin-top: 100px;
+  transform: scale(1);
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1))
+    drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
   transition: 250ms;
+  padding: 0;
 }
 
-.colExp:hover {
-  width: 40px;
-  transition: 250ms;
-}
-
-.colExp .center {
-  transform: scaleX(0);
-  transform-origin: right;
-  color: white;
-  padding-top: 50vh;
-  padding-left: 2px;
-  transition: 250ms;
-}
-
-.colExpHov:hover .center {
-  transform: scaleX(1);
-  transition: 250ms;
-}
-
-#sideMenu {
+#sideBar:hover .closeImage {
+  transform: scale(0.9);
+  /* filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 1)); */
   transition: 250ms;
 }
 
 #sideBar {
-  position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
   width: 60px;
   height: 100vh;
   transition: 250ms;
+  padding: 0;
+  box-shadow: 0px 0px 15px black;
+}
+
+#sideBar img {
+  padding-left: 5px;
+}
+
+#sideBar h2 {
+  margin-top: 80px;
+  transform: rotate(90deg);
+  padding: 5px;
+  color: rgb(53, 53, 53);
+  letter-spacing: 10px;
+  font-weight: bold;
+}
+
+#sideMenu {
+  padding: 0;
 }
