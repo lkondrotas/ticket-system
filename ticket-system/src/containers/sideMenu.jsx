@@ -1,7 +1,8 @@
-import { Col, Button, Collapse, Row, Fade } from "react-bootstrap";
+import { Col, Button, Collapse, Row, Fade, Container } from "react-bootstrap";
 import React from "react";
 import "../css/nav.css";
 import arrow from "../images/arrow.svg";
+import arrow2 from "../images/arrow2.svg";
 
 class SideMenu extends React.Component {
   state = {
@@ -11,40 +12,34 @@ class SideMenu extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Col xs={3} className="vh-100  colExpHov">
-          <Collapse
-            in={this.state.open}
-            aria-controls="sideMenu"
-            aria-expanded={this.state.open}
-            dimension="width"
-          >
-            <Row className="bg-secondary" id="sideMenu">
-              <Col></Col>
-              <Col xs="1">
-                <a href="#sideMenu">
-                  <div
-                    onClick={() => this.setState({ open: false })}
-                    className="colExp"
-                  >
-                    <img src={arrow} alt="Arrow" className="center" />
-                  </div>
-                </a>
-              </Col>
-            </Row>
-          </Collapse>
-        </Col>
-        <Fade
-          in={!this.state.open}
-          aria-controls="sideBar"
-          aria-expanded={!this.state.open}
+        <Collapse in={this.state.open} dimension="width">
+          <Col id="sideMenu" xs={2} className="vh-100 bg-secondary">
+            <div
+              style={{ width: "calc((100vw / 12)*2)", height: "80px" }}
+            ></div>
+            {/* Place filers content here <Filers /> */}
+          </Col>
+        </Collapse>
+
+        <a
+          id="sideBar"
+          className="bg-secondary text-uppercase text-decoration-none text-nowrap"
+          href="#sideMenu"
+          onClick={() => {
+            this.state.open
+              ? this.setState({ open: false })
+              : this.setState({ open: true });
+          }}
         >
-          <div id="sideBar">
-            <br></br>
-            <br></br>
-            <br></br>
-            <Button onClick={() => this.setState({ open: true })}></Button>
+          <div>
+            <img
+              src={this.state.open ? arrow : arrow2}
+              alt="Arrow"
+              className="closeImage"
+            />
+            <h2>filters | preferences</h2>
           </div>
-        </Fade>
+        </a>
       </React.Fragment>
     );
   }
