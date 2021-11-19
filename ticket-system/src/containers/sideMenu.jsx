@@ -1,4 +1,4 @@
-import { Col, Button, Collapse, Row, Fade, Container } from "react-bootstrap";
+import { Col, Collapse } from "react-bootstrap";
 import React from "react";
 import "../css/nav.css";
 import arrow from "../images/arrow.svg";
@@ -23,8 +23,8 @@ class SideMenu extends React.Component {
 
         <a
           id="sideBar"
+          href="javascript:void(0)"
           className="bg-secondary text-uppercase text-decoration-none text-nowrap"
-          href="#sideMenu"
           onClick={() => {
             this.state.open
               ? this.setState({ open: false })

@@ -12,27 +12,27 @@ class NavTop extends React.Component {
     {
       id: 1,
       name: "Home",
-      href: "#home",
+      href: "#/home",
     },
     {
       id: 2,
       name: "All tickets",
-      href: "#alltickets",
+      href: "#/alltickets",
     },
     {
       id: 3,
       name: "My tickets",
-      href: "#mytickets",
+      href: "#/mytickets",
     },
     {
       id: 4,
       name: "Reports",
-      href: "#reports",
+      href: "#/reports",
     },
     {
       id: 5,
       name: "Exports",
-      href: "#exports",
+      href: "#/exports",
     },
   ];
 
