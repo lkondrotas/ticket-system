@@ -42,3 +42,7 @@
 .forms {
   padding: 0 20px;
 }
+
+.fields:hover {
+  border: solid 1px white;
+}
