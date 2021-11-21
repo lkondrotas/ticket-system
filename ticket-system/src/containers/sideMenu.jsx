@@ -4,13 +4,14 @@ import "../css/nav.css";
 import arrow from "../images/arrow.svg";
 import arrow2 from "../images/arrow2.svg";
 import SideForms from "./sideForms";
+import SavedFilters from "./SavedFilters";
 
 class SideMenu extends React.Component {
   state = {
     open: true,
   };
 
-  filters = [
+  formFields = [
     {
       id: 1,
       type: "input",
@@ -39,6 +40,13 @@ class SideMenu extends React.Component {
       placeHolder: "TestPlaceHolder4",
       options: ["test", "lorum", "ipsum"],
     },
+    {
+      id: 5,
+      type: "select",
+      label: "TestLable4",
+      placeHolder: "TestPlaceHolder4",
+      options: ["test", "lorum", "ipsum"],
+    },
   ];
 
   render() {
@@ -49,18 +57,8 @@ class SideMenu extends React.Component {
             <div
               style={{ width: "calc((100vw / 12)*2)", height: "80px" }}
             ></div>
-            <Form className="forms">
-              <Form.Group >
-                {this.filters.map((a) => (
-                  <SideForms
-                    type={a.type}
-                    label={a.label}
-                    placeHolder={a.placeHolder}
-                    options={a.options}
-                  />
-                ))}
-              </Form.Group>
-            </Form>
+            <SideForms formFields={this.formFields} />
+            <SavedFilters />
             {/* Place filers content here <Filers /> */}
           </Col>
         </Collapse>

@@ -37,10 +37,11 @@
 
 #sideMenu {
   padding: 0;
+  overflow: hidden;
 }
 
 .forms {
-  padding: 0 20px;
+  padding: 5px 20px;
 }
 
 .fields:hover {
