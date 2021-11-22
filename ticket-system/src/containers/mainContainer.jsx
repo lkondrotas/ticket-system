@@ -9,7 +9,7 @@ class MainContainer extends React.Component {
   render() {
     return (
       <Container fluid>
-        <Row bg="dark">
+        <Row>
           <SideMenu />
           <Main />
         </Row>
