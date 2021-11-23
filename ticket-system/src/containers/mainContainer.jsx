@@ -1,4 +1,4 @@
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import SideMenu from "./sideMenu";
 import Main from "./Main";
 import React from "react";

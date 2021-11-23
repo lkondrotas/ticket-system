@@ -39,12 +39,12 @@
   padding: 0;
 }
 
-.table-scroll {
+/* .table-scroll {
   overflow: auto;
-  /* max-width: calc((100vw / 12) * 9.3);*/
+   max-width: calc((100vw / 12) * 9.3);
   height: 80vh;
 }
 
 .table-scroll th {
   min-width: 50px;
-}
+} */
