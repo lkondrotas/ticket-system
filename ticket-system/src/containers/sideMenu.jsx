@@ -1,6 +1,6 @@
 import { Col, Collapse, Form } from "react-bootstrap";
 import React from "react";
-import "../css/nav.css";
+import "../css/style.css";
 import arrow from "../images/arrow.svg";
 import arrow2 from "../images/arrow2.svg";
 import SideForms from "./sideForms";
