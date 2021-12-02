@@ -1,0 +1,30 @@
+[
+    {
+      "Header": "Name",
+      "accessor": "name"
+    },
+    {
+      "Header": "Email",
+      "accessor": "email"
+    },
+    {
+      "Header": "Country",
+      "accessor": "country"
+    },
+    {
+      "Header": "Region",
+      "accessor": "region"
+    },
+    {
+      "Header": "Address",
+      "accessor": "address"
+    },
+    {
+      "Header": "Phone",
+      "accessor": "phone"
+    },
+    {
+      "Header": "Zip",
+      "accessor": "postalZip"
+    }
+  ]
