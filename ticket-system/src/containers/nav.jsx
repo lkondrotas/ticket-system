@@ -2,45 +2,19 @@ import React from "react";
 import logo from "../images/logo2.svg";
 import avatar from "../images/avatar.svg";
 import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
+import { NavLink, Link } from "react-router-dom";
+import menuList from "../data/menuList.json";
 
 class NavTop extends React.Component {
   state = {
     userFullName: "Lukas Kondrotas",
   };
 
-  menuList = [
-    {
-      id: 1,
-      name: "Home",
-      href: "#/home",
-    },
-    {
-      id: 2,
-      name: "All tickets",
-      href: "#/alltickets",
-    },
-    {
-      id: 3,
-      name: "My tickets",
-      href: "#/mytickets",
-    },
-    {
-      id: 4,
-      name: "Reports",
-      href: "#/reports",
-    },
-    {
-      id: 5,
-      name: "Exports",
-      href: "#/exports",
-    },
-  ];
-
   render() {
     return (
       <Navbar fixed="top" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand as={Link} to="/">
             <img
               src={logo}
               alt="test"
@@ -50,8 +24,10 @@ class NavTop extends React.Component {
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            {this.menuList.map((name) => (
-              <Nav.Link href={name.href} key={name.id}>{name.name}</Nav.Link>
+            {menuList.map((name) => (
+              <Nav.Link as={NavLink} to={name.href} activeClassName="active">
+                {name.name}
+              </Nav.Link>
             ))}
           </Nav>
           <Nav className="justify-content-end">
@@ -62,7 +38,9 @@ class NavTop extends React.Component {
               <Dropdown.Menu variant="dark">
                 <Dropdown.Header>{this.state.userFullName}</Dropdown.Header>
                 <Dropdown.Divider />
-                <Dropdown.Item href="#">Profile</Dropdown.Item>
+                <Dropdown.Item as={Link} to="profile">
+                  Profile
+                </Dropdown.Item>
                 <Dropdown.Item href="#">Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

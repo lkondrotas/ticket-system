@@ -56,7 +56,7 @@ export default function CustomTable({ columns, data }) {
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
-      <Container fluid className="overflow-auto" style={{ maxHeight: "80vh" }}>
+      <Container fluid className="overflow-auto" style={{ maxHeight: "75vh" }}>
         <Table striped hover {...getTableProps()}>
           <thead className="sticky-top bg-white shadow">
             {headerGroups.map((headerGroup) => (

@@ -7,7 +7,7 @@ import headers from "../data/headers.json";
 import arrow from "../images/arrow.svg";
 import arrow2 from "../images/arrow2.svg";
 
-class MainContainer extends React.Component {
+class AllTickets extends React.Component {
   state = {
     open: false,
   };
@@ -46,12 +46,10 @@ class MainContainer extends React.Component {
               </div>
             </a>
           </React.Fragment>
-          <Col
-            style={{ maxHeight: "100vh", paddingTop: "75px" }}
-            className="overflow-auto"
-          >
+          <Col style={{ paddingTop: "75px" }} className="overflow-auto">
             <Container fluid>
               <Row>
+                <h2>All tickets</h2>
                 <CustomTable columns={headers} data={data} />
               </Row>
             </Container>
@@ -62,4 +60,4 @@ class MainContainer extends React.Component {
   }
 }
 
-export default MainContainer;
+export default AllTickets;
