@@ -1,6 +1,6 @@
 import { Container, Row, Col, Collapse } from "react-bootstrap";
 import "../css/nav.css";
-import React, { useEffect } from "react";
+import React from "react";
 import CustomTable from "../components/table";
 import data from "../data/data.json";
 import headers from "../data/headers.json";
