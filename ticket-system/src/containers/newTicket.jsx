@@ -25,11 +25,11 @@ class NewTicket extends React.Component {
 
   render() {
     return (
-      <Container fluid as={Form} method="_POST">
+      <Container fluid as={Form}>
         <Row>
           <React.Fragment>
             <Collapse in={this.state.open} dimension="width">
-              <Col id="sideMenu" xs={2} className="vh-100 bg-secondary">
+              <Col id="sideMenu" xl={2} xs={3} className="vh-100 bg-secondary">
                 <div
                   style={{ width: "calc((100vw / 12)*2)", height: "80px" }}
                 ></div>
@@ -39,18 +39,48 @@ class NewTicket extends React.Component {
                     <Form.Control
                       type="text"
                       placeholder="Enter merchant identifier"
-                      onChange={(e) => (this.value = e.target.value)}
                     ></Form.Control>
-                    <Button
-                    // onClick={() =>
-                    //   this.setState({ mi: this.Merchantinfo(this.value) })
-                    // }
-                    >
-                      Search
-                    </Button>
+                    <Button>Search</Button>
                   </InputGroup>
                   <br />
-                  {this.state.mi}
+                  <React.Fragment>
+                    <FloatingLabel label="DBA">
+                      <Form.Control
+                        className="rounded-0"
+                        disabled
+                        value={testMids[0].dba}
+                      ></Form.Control>
+                    </FloatingLabel>
+                    <FloatingLabel label="MID/SN">
+                      <Form.Control
+                        className="rounded-0"
+                        disabled
+                        value={testMids[0].mid}
+                      ></Form.Control>
+                    </FloatingLabel>
+                    <FloatingLabel label="Email">
+                      <Form.Control
+                        className="rounded-0"
+                        disabled
+                        value={testMids[0].email}
+                      ></Form.Control>
+                    </FloatingLabel>
+                    <FloatingLabel label="Phone Number">
+                      <Form.Control
+                        className="rounded-0"
+                        disabled
+                        value={testMids[0].phone}
+                      ></Form.Control>
+                    </FloatingLabel>
+                    <br />
+                    <FloatingLabel label="Test">
+                      <Form.Control
+                        className="border-0 rounded-0"
+                        disabled
+                        value={testMids[0].tba}
+                      ></Form.Control>
+                    </FloatingLabel>
+                  </React.Fragment>
                 </Form.Group>
               </Col>
             </Collapse>
@@ -75,81 +105,23 @@ class NewTicket extends React.Component {
               </div>
             </a>
           </React.Fragment>
-          <Col style={{ paddingTop: "75px" }} className="overflow-auto">
+          <Col style={{ paddingTop: "75px" }}>
             <Container fluid>
-              <Row>{this.MerchantSelection(2)}</Row>
+              <Row className="overflow-scroll" style={{ maxHeight: "90vh" }}>
+                <React.Fragment>
+                  <Form.Label>Test</Form.Label>
+                  <Form.Control as="textarea"></Form.Control>
+                </React.Fragment>
+              </Row>
             </Container>
+          </Col>
+          <Col xl={2} xs={3} className="vh-100 bg-secondary shadow-sm">
+            <div style={{ height: "80px" }}></div>
+            <div>Test</div>
           </Col>
         </Row>
       </Container>
     );
-  }
-
-  MerchantSelection(value) {
-    let list = testMids.filter((test) => test.mid == value);
-    const merchants = list.map((listItem) => ({
-      dba: listItem.dba,
-      mid: listItem.mid,
-      email: listItem.email,
-      phone: listItem.phone,
-      tba: listItem.tba,
-    }));
-    return (
-      <Form.Control as="select" custom onChange={(e) => this.Merchantinfo(e)}>
-        <option value={null}>Test</option>
-        {merchants.map((merchant) => (
-          <option value={merchant}>{merchant.dba}</option>
-        ))}
-      </Form.Control>
-    );
-  }
-
-  Merchantinfo(merchant) {
-    console.log(merchant);
-    if (merchant) {
-      this.setState({
-        mi: (
-          <React.Fragment>
-            <FloatingLabel label="DBA">
-              <Form.Control
-                className="rounded-0"
-                disabled
-                value={merchant.dba}
-              ></Form.Control>
-            </FloatingLabel>
-            <FloatingLabel label="MID/SN">
-              <Form.Control
-                className="rounded-0"
-                disabled
-                value={merchant.mid}
-              ></Form.Control>
-            </FloatingLabel>
-            <FloatingLabel label="Email">
-              <Form.Control
-                className="rounded-0"
-                disabled
-                value={merchant.email}
-              ></Form.Control>
-            </FloatingLabel>
-            <FloatingLabel label="Phone Number">
-              <Form.Control
-                className="rounded-0"
-                disabled
-                value={merchant.phone}
-              ></Form.Control>
-            </FloatingLabel>
-            <br />
-            <FloatingLabel label="Test">
-              <Form.Control
-                className="border-0 rounded-0"
-                disabled
-                value={merchant.tba}
-              ></Form.Control>
-            </FloatingLabel>
-          </React.Fragment>
-        ),
-      });
-    }
   }
 }
 
