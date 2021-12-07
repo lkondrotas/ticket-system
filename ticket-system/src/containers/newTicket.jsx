@@ -14,15 +14,17 @@ import React from "react";
 import arrow from "../images/arrow.svg";
 import arrow2 from "../images/arrow2.svg";
 import testMids from "../data/testMids.json";
+import dummyTicket from "../data/dummyTicket.json";
+import probcat from "../data/probCat.json";
 
 class NewTicket extends React.Component {
   state = {
     open: true,
-    value: null,
-    mi: null,
+    selectedReq: null,
+    selectedProd: null,
+    selectedCat: null,
+    selectedSub: null,
   };
-
-  value;
 
   render() {
     return (
@@ -114,7 +116,10 @@ class NewTicket extends React.Component {
                     <InputGroup.Text className="ig-width">
                       Subject
                     </InputGroup.Text>
-                    <Form.Control placeholder="Subject"></Form.Control>
+                    <Form.Control
+                      placeholder="Subject"
+                      value={dummyTicket.subject}
+                    ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
                     <InputGroup.Text className="ig-width">
@@ -124,19 +129,26 @@ class NewTicket extends React.Component {
                       as="textarea"
                       placeholder="Write description of the issue here..."
                       style={{ minHeight: "300px", maxHeight: "600px" }}
+                      value={dummyTicket.description}
                     ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
                     <InputGroup.Text className="ig-width">
                       Date and time
                     </InputGroup.Text>
-                    <Form.Control placeholder=""></Form.Control>
+                    <Form.Control
+                      placeholder=""
+                      value={dummyTicket.dateAndTime}
+                    ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
                     <InputGroup.Text className="ig-width">
                       Error message
                     </InputGroup.Text>
-                    <Form.Control placeholder="Error message"></Form.Control>
+                    <Form.Control
+                      placeholder="Error message"
+                      value={dummyTicket.error}
+                    ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
                     <InputGroup.Text className="ig-width">
@@ -146,6 +158,7 @@ class NewTicket extends React.Component {
                       as="textarea"
                       placeholder="Action plan"
                       style={{ minHeight: "70px", maxHeight: "200px" }}
+                      value={dummyTicket.actionPlan}
                     ></Form.Control>
                   </InputGroup>
                 </Form.Group>
@@ -157,59 +170,21 @@ class NewTicket extends React.Component {
                     as="textarea"
                     placeholder="Write solution how you fixed this issue..."
                     style={{ minHeight: "100px", maxHeight: "200px" }}
+                    value={dummyTicket.solution}
                   ></Form.Control>
                 </InputGroup>
                 <Form.Group>
                   <Form.Text>Notes</Form.Text>
                   <InputGroup>
-                    <Card>
-                      <Card.Header className="align-content-end">
-                        <span className="fw-bold">Lukas Kondrotas</span>{" "}
-                        <span className="fw-light">12/7/2021 3:13 PM</span>
-                      </Card.Header>
-                      <Card.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Doloremque quidem nulla autem necessitatibus
-                        tempore quos quas magni consequuntur veritatis
-                        accusantium laudantium ea blanditiis quasi dolorum, nisi
-                        quaerat fuga obcaecati aliquid. Lorem ipsum, dolor sit
-                        amet consectetur adipisicing elit. Voluptate dolorem
-                        maiores ipsa ex labore aperiam in odit iusto,
-                        laboriosam, molestias nesciunt sit et debitis unde est
-                        ea corporis fuga eligendi? Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Tempora, laboriosam at.
-                        Voluptatibus laborum velit sunt ea itaque, consectetur
-                        architecto aliquam asperiores excepturi, voluptas eos.
-                        Corrupti facere error voluptatum voluptates voluptate.
-                      </Card.Body>
-                    </Card>
-                  </InputGroup>
-                  <InputGroup>
-                    <Card>
-                      <Card.Header>
-                        <span className="fw-bold">Donatas Ladysas</span>{" "}
-                        <span className="fw-light">12/7/2021 4:55 PM</span>
-                      </Card.Header>
-                      <Card.Body>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Asperiores nobis incidunt dicta dolorum dolores error
-                        iure repudiandae numquam, nemo quae distinctio suscipit
-                        esse provident veniam debitis recusandae possimus odit
-                        nulla? Lorem ipsum dolor sit amet consectetur
-                        adipisicing elit. Ipsam blanditiis non quia dolor
-                        perspiciatis illum alias numquam optio ducimus nisi
-                        ratione rerum mollitia, nihil ea officiis doloremque
-                        dolore! At, laboriosam? Lorem, ipsum dolor sit amet
-                        consectetur adipisicing elit. Autem sit, corporis
-                        officia, enim sunt perspiciatis iste ipsa laborum
-                        facilis sequi vitae voluptate molestias exercitationem
-                        ducimus veritatis quam maxime. Similique, repellat!
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Aperiam vel fugit excepturi, tempora soluta dolorem, hic
-                        mollitia repellat quae pariatur veniam provident est,
-                        aliquam nesciunt? Quasi asperiores ex suscipit iusto!
-                      </Card.Body>
-                    </Card>
+                    {dummyTicket.notes.map((note) => (
+                      <Card>
+                        <Card.Header className="align-content-end">
+                          <span className="fw-bold">{note.user}</span>{" "}
+                          <span className="fw-light">{note.dateAndTime}</span>
+                        </Card.Header>
+                        <Card.Body>{note.note}</Card.Body>
+                      </Card>
+                    ))}
                   </InputGroup>
                   <InputGroup>
                     <Form.Control
@@ -232,19 +207,19 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Created
                 </InputGroup.Text>
-                <Form.Control as="text">12/7/2021 3:01 PM</Form.Control>
+                <Form.Control as="text">{dummyTicket.created}</Form.Control>
               </InputGroup>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Updated
                 </InputGroup.Text>
-                <Form.Control as="text">12/7/2021 4:55 PM</Form.Control>
+                <Form.Control as="text">{dummyTicket.updated}</Form.Control>
               </InputGroup>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Source
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.source}>
                   <option>Phone</option>
                   <option>Chat</option>
                   <option>Email</option>
@@ -259,13 +234,13 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Created
                 </InputGroup.Text>
-                <Form.Control as="text">Lukas Kondrotas</Form.Control>
+                <Form.Control as="text">{dummyTicket.createdBy}</Form.Control>
               </InputGroup>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Dept
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.dept}>
                   <option>Advance Support</option>
                   <option>Customer Service</option>
                   <option>Technical Services</option>
@@ -275,7 +250,7 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Dept
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.group}>
                   <option>AS POS/PMS</option>
                   <option>AS Advanced</option>
                   <option>AS Audit</option>
@@ -285,10 +260,56 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Asignee
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.asignee}>
                   <option>Lukas Kondrotas</option>
                   <option>Donatas Ladyas</option>
                   <option>Vardenis Pavardenis</option>
+                </Form.Control>
+              </InputGroup>
+            </Form.Group>
+            <Form.Group>
+              <InputGroup className="mb-1">
+                <InputGroup.Text className="ig-width-side">
+                  Request type
+                </InputGroup.Text>
+                <Form.Control as="select" id="reqtype">
+                  {probcat.requestType.map((item) => (
+                    <option key={item.id}>{item.name}</option>
+                  ))}
+                </Form.Control>
+              </InputGroup>
+              <InputGroup className="mb-1">
+                <InputGroup.Text className="ig-width-side">
+                  Product
+                </InputGroup.Text>
+                <Form.Control as="select">
+                  {probcat.product.map((item) => (
+                    <option key={item.id}>{item.name}</option>
+                  ))}
+                </Form.Control>
+              </InputGroup>
+              <InputGroup className="mb-1">
+                <InputGroup.Text className="ig-width-side">
+                  Category
+                </InputGroup.Text>
+                <Form.Control as="select" id="category">
+                  {probcat.category.map((item) =>
+                    item.idf === 2 ? (
+                      <option key={item.id}>{item.name}</option>
+                    ) : (
+                      ""
+                    )
+                  )}
+                </Form.Control>
+              </InputGroup>
+              <InputGroup className="mb-1">
+                <InputGroup.Text className="ig-width-side">
+                  Subcategory
+                </InputGroup.Text>
+                <Form.Control as="select" id="subcat">
+                  {probcat.subcategory.map((item) => (
+                    <option key={item.id}>{item.name}</option>
+                  ))}
                 </Form.Control>
               </InputGroup>
             </Form.Group>
