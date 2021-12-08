@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "../images/logo2.svg";
 import avatar from "../images/avatar.svg";
-import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import menuList from "../data/menuList.json";
+// import Button from "@restart/ui/esm/Button";
 
 class NavTop extends React.Component {
   state = {
@@ -31,6 +32,13 @@ class NavTop extends React.Component {
             ))}
           </Nav>
           <Nav className="justify-content-end">
+            <Button
+              as={Link}
+              to="newticket"
+              style={{ marginRight: "20px", padding: "12px 20px" }}
+            >
+              New Ticket
+            </Button>
             <Dropdown>
               <Dropdown.Toggle variant="primary" className="p-1">
                 <img src={avatar} alt="test" width="50" height="40" />
