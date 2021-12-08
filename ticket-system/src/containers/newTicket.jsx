@@ -313,7 +313,9 @@ class NewTicket extends React.Component {
                 </Form.Control>
               </InputGroup>
             </Form.Group>
-            <Button className="col-12 btn-lg">Create ticket</Button>
+            <Button type="submit" className="col-12 btn-lg">
+              Create ticket
+            </Button>
           </Col>
         </Row>
       </Container>
