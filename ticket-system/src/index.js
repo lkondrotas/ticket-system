@@ -12,7 +12,7 @@ import Exports from "./containers/exports";
 import Profile from "./containers/profile";
 import Signin from "./containers/signin";
 
-const auth = false;
+const auth = true;
 
 ReactDOM.render(
   auth ? (
