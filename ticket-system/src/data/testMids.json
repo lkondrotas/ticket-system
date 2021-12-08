@@ -1,0 +1,31 @@
+[
+    {
+        "mid":21667484,
+        "dba": "VILNIUS TEST 1",
+        "email": "lkondrotas@shift4.com",
+        "phone": 8883512808,
+        "tba": "TEST"
+    },
+    {
+        "mid":21212121,
+        "dba": "VILNIUS TEST 2",
+        "email": "test@shift4.com",
+        "phone": 3519741100,
+        "tba": "TEST"
+    },
+    {
+        "mid":22222222,
+        "dba": "VILNIUS TEST 3",
+        "email": "risk@shift4.com",
+        "phone": 5102347742,
+        "tba": "TEST"
+    },
+    {
+        "mid":2,
+        "dba": "VILNIUS TEST 3",
+        "email": "risk@shift4.com",
+        "phone": 5102347742,
+        "tba": "TEST"
+    }
+    
+]

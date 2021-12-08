@@ -1,0 +1,71 @@
+{
+  "requestType": [
+    {
+      "id": 0,
+      "name": ""
+    },
+    {
+      "id": 1,
+      "name": "Advanced support"
+    },
+    {
+      "id": 2,
+      "name": "Customer service"
+    },
+    {
+      "id": 3,
+      "name": "POS"
+    }
+  ],
+  "product": [
+    {
+      "id": 1,
+      "name": "LTM",
+      "idf": 1
+    },
+    {
+      "id": 2,
+      "name": "UTG",
+      "idf": 1
+    },
+    {
+      "id": 3,
+      "name": "RMA",
+      "idf": 2
+    },
+    {
+      "id": 4,
+      "name": "Funding",
+      "idf": 2
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "name": "Tune Up",
+      "idf": 2
+    },
+    {
+      "id": 2,
+      "name": "Troubleshooting",
+      "idf": 2
+    }
+  ],
+  "subcategory": [
+    {
+      "id": 1,
+      "name": "Reinstallation",
+      "idf": 1
+    },
+    {
+      "id": 2,
+      "name": "Adding device",
+      "idf": 1
+    },
+    {
+      "id": 3,
+      "name": "Pin Pad Pause",
+      "idf": 2
+    }
+  ]
+}
