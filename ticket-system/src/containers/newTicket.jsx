@@ -20,10 +20,10 @@ import probcat from "../data/probCat.json";
 class NewTicket extends React.Component {
   state = {
     open: true,
-    selectedReq: "Select",
-    selectedProd: "Select",
-    selectedCat: "Select",
-    selectedSub: "Select",
+    selectedReq: null,
+    selectedProd: null,
+    selectedCat: null,
+    selectedSub: null,
   };
 
   render() {
@@ -280,20 +280,20 @@ class NewTicket extends React.Component {
                   id="reqtype"
                   onChange={(e) =>
                     this.setState({
-                      selectedReq: e.target.value,
-                      selectedProd: "Select",
-                      selectedSub: "Select",
-                      selectedCat: "Select",
+                      selectedReq: Number(e.target.value),
+                      selectedProd: null,
+                      selectedSub: null,
+                      selectedCat: null,
                     })
                   }
                 >
-                  <option>Select</option>
+                  <option value={null} label="Select"></option>
                   {probcat.requestType.map((item) => (
                     <option value={item.id} label={item.name}></option>
                   ))}
                 </Form.Control>
               </InputGroup>
-              {this.state.selectedReq !== "Select" ? (
+              {this.state.selectedReq ? (
                 <InputGroup className="mb-1">
                   <InputGroup.Text className="ig-width-side">
                     Product
@@ -302,15 +302,15 @@ class NewTicket extends React.Component {
                     as="select"
                     onChange={(e) =>
                       this.setState({
-                        selectedProd: e.target.value,
-                        selectedSub: "Select",
-                        selectedCat: "Select",
+                        selectedProd: Number(e.target.value),
+                        selectedSub: null,
+                        selectedCat: null,
                       })
                     }
                   >
-                    <option>Select</option>
+                    <option value={null} label="Select"></option>
                     {probcat.product.map((item) =>
-                      this.state.selectedReq == item.idf ? (
+                      this.state.selectedReq === item.idf ? (
                         <option value={item.id} label={item.name}>
                           {item.name}
                         </option>
@@ -323,7 +323,7 @@ class NewTicket extends React.Component {
               ) : (
                 ""
               )}
-              {this.state.selectedProd !== "Select" ? (
+              {this.state.selectedProd ? (
                 <InputGroup className="mb-1">
                   <InputGroup.Text className="ig-width-side">
                     Category
@@ -333,14 +333,14 @@ class NewTicket extends React.Component {
                     id="category"
                     onChange={(e) =>
                       this.setState({
-                        selectedCat: e.target.value,
-                        selectedSub: "Select",
+                        selectedCat: Number(e.target.value),
+                        selectedSub: null,
                       })
                     }
                   >
-                    <option>Select</option>
+                    <option value={null} label="Select"></option>
                     {probcat.category.map((item) =>
-                      this.state.selectedProd == item.idf ? (
+                      this.state.selectedProd === item.idf ? (
                         <option value={item.id} label={item.name}>
                           {item.name}
                         </option>
@@ -353,15 +353,15 @@ class NewTicket extends React.Component {
               ) : (
                 ""
               )}
-              {this.state.selectedCat !== "Select" ? (
+              {this.state.selectedCat ? (
                 <InputGroup className="mb-1">
                   <InputGroup.Text className="ig-width-side">
                     Subcategory
                   </InputGroup.Text>
                   <Form.Control as="select" id="subcat">
-                    <option>Select</option>
+                    <option value={null} label="Select"></option>
                     {probcat.subcategory.map((item) =>
-                      this.state.selectedCat == item.idf ? (
+                      this.state.selectedCat === item.idf ? (
                         <option value={item.id} label={item.name}>
                           {item.name}
                         </option>
