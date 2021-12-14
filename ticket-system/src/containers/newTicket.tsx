@@ -267,51 +267,113 @@ class NewTicket extends React.Component {
                 </Form.Control>
               </InputGroup>
             </Form.Group>
-            <Form.Group>
+
+            {/* Problem categories */}
+            <Form.Group className="mb-5">
+              <Form.Text style={{ color: "#fff" }}>Problem category</Form.Text>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Request type
                 </InputGroup.Text>
-                <Form.Control as="select" id="reqtype">
+                <Form.Control
+                  as="select"
+                  id="reqtype"
+                  onChange={(e) =>
+                    this.setState({
+                      selectedReq: Number(e.target.value),
+                      selectedProd: null,
+                      selectedSub: null,
+                      selectedCat: null,
+                    })
+                  }
+                >
+                  <option value={0} label="Select"></option>
                   {probcat.requestType.map((item) => (
-                    <option key={item.id}>{item.name}</option>
+                    <option value={item.id} label={item.name}></option>
                   ))}
                 </Form.Control>
               </InputGroup>
-              <InputGroup className="mb-1">
-                <InputGroup.Text className="ig-width-side">
-                  Product
-                </InputGroup.Text>
-                <Form.Control as="select">
-                  {probcat.product.map((item) => (
-                    <option key={item.id}>{item.name}</option>
-                  ))}
-                </Form.Control>
-              </InputGroup>
-              <InputGroup className="mb-1">
-                <InputGroup.Text className="ig-width-side">
-                  Category
-                </InputGroup.Text>
-                <Form.Control as="select" id="category">
-                  {probcat.category.map((item) =>
-                    item.idf === 2 ? (
-                      <option key={item.id}>{item.name}</option>
-                    ) : (
-                      ""
-                    )
-                  )}
-                </Form.Control>
-              </InputGroup>
-              <InputGroup className="mb-1">
-                <InputGroup.Text className="ig-width-side">
-                  Subcategory
-                </InputGroup.Text>
-                <Form.Control as="select" id="subcat">
-                  {probcat.subcategory.map((item) => (
-                    <option key={item.id}>{item.name}</option>
-                  ))}
-                </Form.Control>
-              </InputGroup>
+              {this.state.selectedReq ? (
+                <InputGroup className="mb-1">
+                  <InputGroup.Text className="ig-width-side">
+                    Product
+                  </InputGroup.Text>
+                  <Form.Control
+                    as="select"
+                    onChange={(e) =>
+                      this.setState({
+                        selectedProd: Number(e.target.value),
+                        selectedSub: null,
+                        selectedCat: null,
+                      })
+                    }
+                  >
+                    <option value={0} label="Select"></option>
+                    {probcat.product.map((item) =>
+                      this.state.selectedReq === item.idf ? (
+                        <option value={item.id} label={item.name}>
+                          {item.name}
+                        </option>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </Form.Control>
+                </InputGroup>
+              ) : (
+                ""
+              )}
+              {this.state.selectedProd ? (
+                <InputGroup className="mb-1">
+                  <InputGroup.Text className="ig-width-side">
+                    Category
+                  </InputGroup.Text>
+                  <Form.Control
+                    as="select"
+                    id="category"
+                    onChange={(e) =>
+                      this.setState({
+                        selectedCat: Number(e.target.value),
+                        selectedSub: null,
+                      })
+                    }
+                  >
+                    <option value={0} label="Select"></option>
+                    {probcat.category.map((item) =>
+                      this.state.selectedProd === item.idf ? (
+                        <option value={item.id} label={item.name}>
+                          {item.name}
+                        </option>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </Form.Control>
+                </InputGroup>
+              ) : (
+                ""
+              )}
+              {this.state.selectedCat ? (
+                <InputGroup className="mb-1">
+                  <InputGroup.Text className="ig-width-side">
+                    Subcategory
+                  </InputGroup.Text>
+                  <Form.Control as="select" id="subcat">
+                    <option value={0} label="Select"></option>
+                    {probcat.subcategory.map((item) =>
+                      this.state.selectedCat === item.idf ? (
+                        <option value={item.id} label={item.name}>
+                          {item.name}
+                        </option>
+                      ) : (
+                        ""
+                      )
+                    )}
+                  </Form.Control>
+                </InputGroup>
+              ) : (
+                ""
+              )}
             </Form.Group>
             <Button type="submit" className="col-12 btn-lg">
               Create ticket

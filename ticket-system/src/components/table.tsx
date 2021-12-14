@@ -52,7 +52,6 @@ export default function CustomTable({ columns, data }) {
   return (
     <React.Fragment>
       <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
@@ -71,7 +70,7 @@ export default function CustomTable({ columns, data }) {
           </thead>
 
           <tbody {...getTableBodyProps()}>
-            {page.map((row, i) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
@@ -144,7 +143,6 @@ export default function CustomTable({ columns, data }) {
 }
 
 function GlobalFilter({
-  preGlobalFilteredRows,
   globalFilter,
   setGlobalFilter,
 }) {
@@ -154,7 +152,7 @@ function GlobalFilter({
   }, 0);
 
   return (
-    <InputGroup className="pb-2" variant="primary">
+    <InputGroup className="pb-2">
       <InputGroup.Text>Search</InputGroup.Text>
       <FormControl
         value={value || ""}
