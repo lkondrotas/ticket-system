@@ -12,24 +12,20 @@ import Exports from "./containers/exports";
 import Profile from "./containers/profile";
 import Signin from "./containers/signin";
 
-const auth = true;
+const auth: boolean = true;
 
 ReactDOM.render(
-  auth ? (
-    <BrowserRouter>
-      <NavTop />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="alltickets" element={<AllTickets />} />
-        <Route path="mytickets" element={<MyTickets />}></Route>
-        <Route path="reports" element={<Reports />}></Route>
-        <Route path="exports" element={<Exports />}></Route>
-        <Route path="newticket" element={<NewTicket />} />
-        <Route path="profile" element={<Profile />}></Route>
-      </Routes>
-    </BrowserRouter>
-  ) : (
-    <Signin />
-  ),
+  <BrowserRouter>
+    <NavTop></NavTop>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="alltickets" element={<AllTickets />} />
+      <Route path="mytickets" element={<MyTickets />}></Route>
+      <Route path="reports" element={<Reports />}></Route>
+      <Route path="exports" element={<Exports />}></Route>
+      <Route path="newticket" element={<NewTicket />} />
+      <Route path="profile" element={<Profile />}></Route>
+    </Routes>
+  </BrowserRouter>,
   document.getElementById("root")
 );

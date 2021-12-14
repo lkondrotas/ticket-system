@@ -26,19 +26,19 @@ class NavTop extends React.Component {
           </Navbar.Brand>
           <Nav className="me-auto">
             {menuList.map((name) => (
-              <Nav.Link as={NavLink} to={name.href} activeClassName="active">
+              <Nav.Link as={NavLink} to={name.href}>
                 {name.name}
               </Nav.Link>
             ))}
           </Nav>
           <Nav className="justify-content-end">
-            <Button
+            <Nav.Link
               as={Link}
               to="newticket"
               style={{ marginRight: "20px", padding: "12px 20px" }}
             >
               New Ticket
-            </Button>
+            </Nav.Link>
             <Dropdown>
               <Dropdown.Toggle variant="primary" className="p-1">
                 <img src={avatar} alt="test" width="50" height="40" />

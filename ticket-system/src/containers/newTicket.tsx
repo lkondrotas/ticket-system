@@ -287,7 +287,7 @@ class NewTicket extends React.Component {
                     })
                   }
                 >
-                  <option value={null} label="Select"></option>
+                  <option value={0} label="Select"></option>
                   {probcat.requestType.map((item) => (
                     <option value={item.id} label={item.name}></option>
                   ))}
@@ -308,7 +308,7 @@ class NewTicket extends React.Component {
                       })
                     }
                   >
-                    <option value={null} label="Select"></option>
+                    <option value={0} label="Select"></option>
                     {probcat.product.map((item) =>
                       this.state.selectedReq === item.idf ? (
                         <option value={item.id} label={item.name}>
@@ -338,7 +338,7 @@ class NewTicket extends React.Component {
                       })
                     }
                   >
-                    <option value={null} label="Select"></option>
+                    <option value={0} label="Select"></option>
                     {probcat.category.map((item) =>
                       this.state.selectedProd === item.idf ? (
                         <option value={item.id} label={item.name}>
@@ -359,7 +359,7 @@ class NewTicket extends React.Component {
                     Subcategory
                   </InputGroup.Text>
                   <Form.Control as="select" id="subcat">
-                    <option value={null} label="Select"></option>
+                    <option value={0} label="Select"></option>
                     {probcat.subcategory.map((item) =>
                       this.state.selectedCat === item.idf ? (
                         <option value={item.id} label={item.name}>
