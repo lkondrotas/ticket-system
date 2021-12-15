@@ -44,7 +44,6 @@ export default function CustomTable({ columns, data }) {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
-    preGlobalFilteredRows,
     setGlobalFilter,
     state,
   } = tableInstace;

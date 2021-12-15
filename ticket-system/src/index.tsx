@@ -10,9 +10,6 @@ import Home from "./containers/home";
 import Reports from "./containers/reports";
 import Exports from "./containers/exports";
 import Profile from "./containers/profile";
-import Signin from "./containers/signin";
-
-const auth: boolean = true;
 
 ReactDOM.render(
   <BrowserRouter>

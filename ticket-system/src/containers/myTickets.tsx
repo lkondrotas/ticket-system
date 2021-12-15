@@ -28,7 +28,7 @@ class MyTickets extends React.Component {
 
             <a
               id="sideBar"
-              href="javascript:void(0)"
+              href="#main"
               className="bg-secondary text-uppercase text-decoration-none text-nowrap"
               onClick={() => {
                 this.state.open
