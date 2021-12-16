@@ -26,7 +26,7 @@ export default function CustomTable({ columns, data }) {
     },
     useFilters,
     useGlobalFilter,
-    usePagination
+    usePagination,
   );
 
   const {
@@ -44,8 +44,10 @@ export default function CustomTable({ columns, data }) {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
+    setFilter,
     setGlobalFilter,
     state,
+
   } = tableInstace;
 
   return (
@@ -54,6 +56,7 @@ export default function CustomTable({ columns, data }) {
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
+      <FilterTest id="Email" setFilter={setFilter} />
       <Container fluid className="overflow-auto" style={{ maxHeight: "75vh" }}>
         <Table striped hover {...getTableProps()}>
           <thead className="sticky-top bg-white shadow">
@@ -161,5 +164,45 @@ function GlobalFilter({
         }}
       />
     </InputGroup>
+  );
+}
+
+//Attempt on filter fields (didnt work)
+
+// function FilterTest(id, filterValue, setFilter, preFilteredRows) {
+//   const options = React.useMemo(() => {
+//     const options = new Set()
+//     preFilteredRows.forEach(row => {
+//       options.add(row.values[id])
+//     })
+//     return [...options.values()]
+//   }, [id, preFilteredRows])
+
+//   // Render a multi-select box
+//   return (
+//     <select
+//       value={filterValue}
+//       onChange={e => {
+//         setFilter(e.target.value || undefined)
+//       }}
+//     >
+//       {console.log(preFilteredRows)}
+//       <option value="">All</option>
+//       {options.map((option, i) => (
+//         <option key={i} value="test">
+//           test
+//         </option>
+//       ))}
+//     </select>
+//   )
+// }
+
+function FilterTest(id, setFilter) {
+  const options = ["test", "test2"];
+  return (
+    <select value="" onChange={e => setFilter(id, e.target.value || undefined)}>
+      <option value="">All</option>
+      {options.map((option, i) => (<option key={i} value={option}>{option}</option>))}
+    </select>
   );
 }
