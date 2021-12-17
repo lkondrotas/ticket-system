@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useImperativeHandle} from "react";
 import {
   Table,
   Button,
@@ -14,9 +14,11 @@ import {
   useAsyncDebounce,
 } from "react-table";
 
-export default function CustomTable({ columns, data }) {
-  // useMemo(() => columns, []);
-  // useMemo(() => data, []);
+type Props = {
+  children?: React.ReactNode;
+}
+
+const CustomTable = React.forwardRef(({ columns, data }, ref) => {
 
   const tableInstace = useTable(
     {
@@ -37,7 +39,6 @@ export default function CustomTable({ columns, data }) {
     page,
     canPreviousPage,
     canNextPage,
-    // pageOptions,
     pageCount,
     gotoPage,
     nextPage,
@@ -50,13 +51,15 @@ export default function CustomTable({ columns, data }) {
 
   } = tableInstace;
 
+useImperativeHandle(ref, () => tableInstace);
+
   return (
     <React.Fragment>
+      <input placeholder="Firstname" onChange={e => setFilter("email", e.target.value)} />
       <GlobalFilter
         globalFilter={state.globalFilter}
         setGlobalFilter={setGlobalFilter}
       />
-      <FilterTest id="Email" setFilter={setFilter} />
       <Container fluid className="overflow-auto" style={{ maxHeight: "75vh" }}>
         <Table striped hover {...getTableProps()}>
           <thead className="sticky-top bg-white shadow">
@@ -142,7 +145,7 @@ export default function CustomTable({ columns, data }) {
       </Container>
     </React.Fragment>
   );
-}
+});
 
 function GlobalFilter({
   globalFilter,
@@ -167,42 +170,4 @@ function GlobalFilter({
   );
 }
 
-//Attempt on filter fields (didnt work)
-
-// function FilterTest(id, filterValue, setFilter, preFilteredRows) {
-//   const options = React.useMemo(() => {
-//     const options = new Set()
-//     preFilteredRows.forEach(row => {
-//       options.add(row.values[id])
-//     })
-//     return [...options.values()]
-//   }, [id, preFilteredRows])
-
-//   // Render a multi-select box
-//   return (
-//     <select
-//       value={filterValue}
-//       onChange={e => {
-//         setFilter(e.target.value || undefined)
-//       }}
-//     >
-//       {console.log(preFilteredRows)}
-//       <option value="">All</option>
-//       {options.map((option, i) => (
-//         <option key={i} value="test">
-//           test
-//         </option>
-//       ))}
-//     </select>
-//   )
-// }
-
-function FilterTest(id, setFilter) {
-  const options = ["test", "test2"];
-  return (
-    <select value="" onChange={e => setFilter(id, e.target.value || undefined)}>
-      <option value="">All</option>
-      {options.map((option, i) => (<option key={i} value={option}>{option}</option>))}
-    </select>
-  );
-}
+export default CustomTable;

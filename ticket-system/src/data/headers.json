@@ -1,30 +1,37 @@
 [
     {
       "Header": "Name",
-      "accessor": "name"
+      "accessor": "name",
+      "filter": "FilterTest"
     },
     {
       "Header": "Email",
-      "accessor": "email"
+      "accessor": "email",
+      "filter": "FilterTest"
     },
     {
       "Header": "Country",
-      "accessor": "country"
+      "accessor": "country",
+      "filter": "FilterTest"
     },
     {
       "Header": "Region",
-      "accessor": "region"
+      "accessor": "region",
+      "filter": "FilterTest"
     },
     {
       "Header": "Address",
-      "accessor": "address"
+      "accessor": "address",
+      "filter": "FilterTest"
     },
     {
       "Header": "Phone",
-      "accessor": "phone"
+      "accessor": "phone",
+      "filter": "FilterTest"
     },
     {
       "Header": "Zip",
-      "accessor": "postalZip"
+      "accessor": "postalZip",
+      "filter": "FilterTest"
     }
   ]
