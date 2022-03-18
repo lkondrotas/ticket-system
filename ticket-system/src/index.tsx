@@ -12,6 +12,7 @@ import Exports from "./containers/exports";
 import Profile from "./containers/profile";
 import Signin from "./containers/signin";
 
+//TODO: implement google signin.
 const auth: boolean = true;
 
 ReactDOM.render(
