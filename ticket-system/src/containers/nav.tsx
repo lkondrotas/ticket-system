@@ -34,7 +34,7 @@ class NavTop extends React.Component {
           <Nav className="justify-content-end">
             <Nav.Link
               as={Link}
-              to="newticket"
+              to="tickets/newticket"
               style={{ marginRight: "20px", padding: "12px 20px" }}
             >
               New Ticket

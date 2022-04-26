@@ -17,7 +17,7 @@ import testMids from "../data/testMids.json";
 import dummyTicket from "../data/dummyTicket.json";
 import probcat from "../data/probCat.json";
 
-class NewTicket extends React.Component {
+class Example extends React.Component {
   state = {
     open: true,
     selectedReq: null,
@@ -25,8 +25,6 @@ class NewTicket extends React.Component {
     selectedCat: null,
     selectedSub: null,
   };
-
-  created = Date.now;
 
   render() {
     return (
@@ -53,24 +51,28 @@ class NewTicket extends React.Component {
                       <Form.Control
                         className="rounded-0"
                         disabled
+                        value={testMids[0].dba}
                       ></Form.Control>
                     </FloatingLabel>
                     <FloatingLabel label="MID/SN">
                       <Form.Control
                         className="rounded-0"
                         disabled
+                        value={testMids[0].mid}
                       ></Form.Control>
                     </FloatingLabel>
                     <FloatingLabel label="Email">
                       <Form.Control
                         className="rounded-0"
                         disabled
+                        value={testMids[0].email}
                       ></Form.Control>
                     </FloatingLabel>
                     <FloatingLabel label="Phone Number">
                       <Form.Control
                         className="rounded-0"
                         disabled
+                        value={testMids[0].phone}
                       ></Form.Control>
                     </FloatingLabel>
                     <br />
@@ -78,6 +80,7 @@ class NewTicket extends React.Component {
                       <Form.Control
                         className="border-0 rounded-0"
                         disabled
+                        value={testMids[0].tba}
                       ></Form.Control>
                     </FloatingLabel>
                   </React.Fragment>
@@ -115,6 +118,7 @@ class NewTicket extends React.Component {
                     </InputGroup.Text>
                     <Form.Control
                       placeholder="Subject"
+                      value={dummyTicket.subject}
                     ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
@@ -125,6 +129,7 @@ class NewTicket extends React.Component {
                       as="textarea"
                       placeholder="Write description of the issue here..."
                       style={{ minHeight: "300px", maxHeight: "600px" }}
+                      value={dummyTicket.description}
                     ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
@@ -133,6 +138,7 @@ class NewTicket extends React.Component {
                     </InputGroup.Text>
                     <Form.Control
                       placeholder=""
+                      value={dummyTicket.dateAndTime}
                     ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
@@ -141,6 +147,7 @@ class NewTicket extends React.Component {
                     </InputGroup.Text>
                     <Form.Control
                       placeholder="Error message"
+                      value={dummyTicket.error}
                     ></Form.Control>
                   </InputGroup>
                   <InputGroup className="mb-2">
@@ -151,6 +158,7 @@ class NewTicket extends React.Component {
                       as="textarea"
                       placeholder="Action plan"
                       style={{ minHeight: "70px", maxHeight: "200px" }}
+                      value={dummyTicket.actionPlan}
                     ></Form.Control>
                   </InputGroup>
                 </Form.Group>
@@ -162,10 +170,22 @@ class NewTicket extends React.Component {
                     as="textarea"
                     placeholder="Write solution how you fixed this issue..."
                     style={{ minHeight: "100px", maxHeight: "200px" }}
+                    value={dummyTicket.solution}
                   ></Form.Control>
                 </InputGroup>
                 <Form.Group>
                   <Form.Text>Notes</Form.Text>
+                  <InputGroup>
+                    {dummyTicket.notes.map((note) => (
+                      <Card>
+                        <Card.Header className="align-content-end">
+                          <span className="fw-bold">{note.user}</span>{" "}
+                          <span className="fw-light">{note.dateAndTime}</span>
+                        </Card.Header>
+                        <Card.Body>{note.note}</Card.Body>
+                      </Card>
+                    ))}
+                  </InputGroup>
                   <InputGroup>
                     <Form.Control
                       as="textarea"
@@ -187,19 +207,19 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Created
                 </InputGroup.Text>
-                <Form.Control as="text"></Form.Control>
+                <Form.Control as="text">{dummyTicket.created}</Form.Control>
               </InputGroup>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Updated
                 </InputGroup.Text>
-                <Form.Control as="text"></Form.Control>
+                <Form.Control as="text">{dummyTicket.updated}</Form.Control>
               </InputGroup>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Source
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.source}>
                   <option>Phone</option>
                   <option>Chat</option>
                   <option>Email</option>
@@ -214,13 +234,13 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Created
                 </InputGroup.Text>
-                <Form.Control as="text"></Form.Control>
+                <Form.Control as="text">{dummyTicket.createdBy}</Form.Control>
               </InputGroup>
               <InputGroup className="mb-1">
                 <InputGroup.Text className="ig-width-side">
                   Dept
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.dept}>
                   <option>Advance Support</option>
                   <option>Customer Service</option>
                   <option>Technical Services</option>
@@ -230,7 +250,7 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Dept
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.group}>
                   <option>AS POS/PMS</option>
                   <option>AS Advanced</option>
                   <option>AS Audit</option>
@@ -240,7 +260,7 @@ class NewTicket extends React.Component {
                 <InputGroup.Text className="ig-width-side">
                   Asignee
                 </InputGroup.Text>
-                <Form.Control as="select">
+                <Form.Control as="select" value={dummyTicket.asignee}>
                   <option>Lukas Kondrotas</option>
                   <option>Donatas Ladyas</option>
                   <option>Vardenis Pavardenis</option>
@@ -365,4 +385,4 @@ class NewTicket extends React.Component {
   }
 }
 
-export default NewTicket;
+export default Example;

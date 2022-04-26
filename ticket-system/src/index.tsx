@@ -11,6 +11,7 @@ import Reports from "./containers/reports";
 import Exports from "./containers/exports";
 import Profile from "./containers/profile";
 import Signin from "./containers/signin";
+import Example from "./containers/ticketExample"
 
 const auth: boolean = true;
 
@@ -23,7 +24,8 @@ ReactDOM.render(
       <Route path="mytickets" element={<MyTickets />}></Route>
       <Route path="reports" element={<Reports />}></Route>
       <Route path="exports" element={<Exports />}></Route>
-      <Route path="newticket" element={<NewTicket />} />
+      <Route path="tickets/newticket" element={<NewTicket />} />
+      <Route path="tickets/123456" element={<Example />} />
       <Route path="profile" element={<Profile />}></Route>
     </Routes>
   </BrowserRouter>,
