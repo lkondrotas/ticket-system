@@ -70,6 +70,16 @@ export default function CustomTable({ columns, data }) {
           </thead>
 
           <tbody {...getTableBodyProps()}>
+            
+            <tr style={{transform: "rotate(0)"}}>
+              <td><a href="./tickets/123456" className="stretched-link text-decoration-none text-reset">123456</a></td>
+              <td>This is a test ticket</td>
+              <td>This is a test ticket</td>
+              <td>This is a test ticket</td>
+              <td>This is a test ticket</td>
+              <td>This is a test ticket</td>
+              <td>This is a test ticket</td>
+            </tr>
             {page.map((row) => {
               prepareRow(row);
               return (
