@@ -60,6 +60,7 @@ export default function CustomTable({ columns, data }) {
           <thead className="sticky-top bg-white shadow">
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
+                <th><input type="checkbox"></input></th>
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps()}>
                     {column.render("Header")}
@@ -71,8 +72,9 @@ export default function CustomTable({ columns, data }) {
 
           <tbody {...getTableBodyProps()}>
             
-            <tr style={{transform: "rotate(0)"}}>
-              <td><a href="./tickets/123456" className="stretched-link text-decoration-none text-reset">123456</a></td>
+            <tr >
+              <td><input type="checkbox"></input></td>
+              <td><a href="./tickets/123456" className=" text-decoration-none text-reset">123456</a></td>
               <td>This is a test ticket</td>
               <td>This is a test ticket</td>
               <td>This is a test ticket</td>
@@ -84,6 +86,7 @@ export default function CustomTable({ columns, data }) {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
+                  <td><input type="checkbox"></input></td>
                   {row.cells.map((cell) => {
                     return (
                       <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
