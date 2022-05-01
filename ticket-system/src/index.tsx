@@ -9,10 +9,8 @@ import Home from "./containers/home";
 import Reports from "./containers/reports";
 import Exports from "./containers/exports";
 import Profile from "./containers/profile";
-import Example from "./containers/ticketExample"
 import NotFound from "./containers/404"
-
-const auth: boolean = true;
+import TicketHandler from "./components/ticketHandler";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -24,9 +22,8 @@ ReactDOM.render(
       <Route path="reports" element={<Reports />}></Route>
       <Route path="exports" element={<Exports />}></Route>
       <Route path="tickets/newticket" element={<NewTicket />} />
-      <Route path="tickets/123456" element={<Example />} />
       <Route path="profile" element={<Profile />}></Route>
-      <Route path="tickets/*" element={<Exports />}></Route> {/* 404 page for tickets */}
+      <Route path="tickets/*" element={<TicketHandler />}></Route> {/*  */}
       <Route path="*" element={<NotFound />}></Route> {/* 404 page */}
     </Routes>
   </BrowserRouter>,

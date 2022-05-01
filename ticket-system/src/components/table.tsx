@@ -13,6 +13,8 @@ import {
   useGlobalFilter,
   useAsyncDebounce,
 } from "react-table";
+import ticketHandler from "./ticketHandler";
+import ExampleTicket from "../containers/ticketExample"
 
 export default function CustomTable({ columns, data }) {
   // useMemo(() => columns, []);
