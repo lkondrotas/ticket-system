@@ -13,12 +13,9 @@ import {
   useGlobalFilter,
   useAsyncDebounce,
 } from "react-table";
-import ticketHandler from "./ticketHandler";
-import ExampleTicket from "../containers/ticketExample"
+import { useNavigate } from "react-router-dom";
 
 export default function CustomTable({ columns, data }) {
-  // useMemo(() => columns, []);
-  // useMemo(() => data, []);
 
   const tableInstace = useTable(
     {
@@ -39,17 +36,20 @@ export default function CustomTable({ columns, data }) {
     page,
     canPreviousPage,
     canNextPage,
-    // pageOptions,
     pageCount,
     gotoPage,
     nextPage,
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
-    preGlobalFilteredRows,
     setGlobalFilter,
     state,
   } = tableInstace;
+
+  const navigate = useNavigate()
+  const handleRowClick = (id) => {
+    navigate(`/tickets/${id}`)
+  }
 
   return (
     <React.Fragment>
@@ -62,7 +62,6 @@ export default function CustomTable({ columns, data }) {
           <thead className="sticky-top bg-white shadow">
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
-                <th><input type="checkbox"></input></th>
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps()}>
                     {column.render("Header")}
@@ -73,22 +72,10 @@ export default function CustomTable({ columns, data }) {
           </thead>
 
           <tbody {...getTableBodyProps()}>
-            
-            <tr >
-              <td><input type="checkbox"></input></td>
-              <td><a href="./tickets/123456" className=" text-decoration-none text-reset">123456</a></td>
-              <td>This is a test ticket</td>
-              <td>This is a test ticket</td>
-              <td>This is a test ticket</td>
-              <td>This is a test ticket</td>
-              <td>This is a test ticket</td>
-              <td>This is a test ticket</td>
-            </tr>
             {page.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
-                  <td><input type="checkbox"></input></td>
+                <tr style={{cursor: "pointer"}} onClick={() => handleRowClick(row.cells[0].value)} {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return (
                       <td {...cell.getCellProps()}>{cell.render("Cell")}</td>

@@ -5,23 +5,8 @@
       "href": "/"
     },
     {
-      "id": 2,
-      "name": "All tickets",
-      "href": "/tickets"
-    },
-    {
       "id": 3,
       "name": "My tickets",
       "href": "/mytickets"
-    },
-    {
-      "id": 4,
-      "name": "Reports",
-      "href": "/reports"
-    },
-    {
-      "id": 5,
-      "name": "Exports",
-      "href": "/exports"
     }
   ]

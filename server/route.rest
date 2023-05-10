@@ -1,0 +1,78 @@
+GET http://localhost:5000/tickets
+
+###
+
+POST http://localhost:5000/tickets
+Content-Type: application/json
+
+{
+    "ticketStatus": "closed",
+    "merchant": {
+        "MID": 123456,
+        "SN": 123456
+    },
+    "ticketBody": {
+        "subject": "TEST TICKET",
+        "description": "TEST TEST",
+        "errorMessage": "9991 - TEST ERROR",
+        "actionPlan": "TEST AP",
+        "solution": "Resolved",
+        "notes": [{
+            "text": "Lorem Ipsum",
+            "addedBy": "Test User"
+        }]
+    },
+    "ticketInfo": {
+        "source": "Email",
+        "tags": ["Test tag", "test tag 2"]
+    },
+    "departmentInfo": {
+        "reporter": "Test User",
+        "department": "Test department",
+        "branch": "Test Branch",
+        "asignee": "Test User"
+    },
+    "categories": {
+        "requestType": "Test type",
+        "product": "Test product",
+        "category": "Test category",
+        "subCategory": "Test Subcategory"
+    }
+}
+
+###
+
+PATCH http://localhost:5000/tickets/644fe98781d68c35b5acfa9a
+Content-Type: application/json
+
+{
+    "name": "Labas"
+}
+
+###
+
+POST http://localhost:5000/tickets/addnote/645022f561ce790c94c3bd2a
+Content-Type: application/json
+
+{
+    "notes": {
+        "text": "TESTING",
+        "addedBy": "Test User 2"
+    }
+}
+
+###
+
+GET http://localhost:5000/tickets/645234d20ad8bee5b64e44
+
+###
+
+GET http://localhost:5000/merchants
+
+###
+
+GET http://localhost:5000/merchants/search/1
+
+###
+
+GET http://localhost:5000/categories/1

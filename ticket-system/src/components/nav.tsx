@@ -25,8 +25,8 @@ class NavTop extends React.Component {
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            {menuList.map((name) => (
-              <Nav.Link as={NavLink} to={name.href}>
+            {menuList.map((name, i) => (
+              <Nav.Link as={NavLink} to={name.href} key={i}>
                 {name.name}
               </Nav.Link>
             ))}
@@ -34,7 +34,7 @@ class NavTop extends React.Component {
           <Nav className="justify-content-end">
             <Nav.Link
               as={Link}
-              to="tickets/newticket"
+              to="tickets/new"
               style={{ marginRight: "20px", padding: "12px 20px" }}
             >
               New Ticket

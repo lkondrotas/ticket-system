@@ -1,291 +1,312 @@
+import React, { useState, useEffect, useRef } from "react";
 import {
-    Container,
-    Row,
-    Col,
-    Collapse,
-    Form,
-    FloatingLabel,
-    InputGroup,
-    Button,
-    Card,
-  } from "react-bootstrap";
-  import "../css/nav.css";
-  import React, { useState } from "react";
-  import arrow from "../images/arrow.svg";
-  import arrow2 from "../images/arrow2.svg";
-  import probcat from "../data/probCat.json";
-  import MerchantInfo from "../containers/ticketMerchantInfo"
-  
- function Ticket(ticketData, merchantData) {
+  Container,
+  Row,
+  Col,
+  Form,
+  InputGroup,
+  Button,
+} from "react-bootstrap";
+import { useParams, useNavigate } from "react-router-dom";
+import MerchantInfo from "../containers/ticketMerchantInfo";
+import CategorySelect from "../containers/ticketCategorySelect";
+import DepartmentSelect from "../containers/ticketDepartments";
+import moment from "moment";
 
-    const [open, setOpen] = useState(true);
-    const [selectedReq, setselectedReq] = useState(0);
-    const [selectedProd, setselectedProd] = useState(0);
-    const [selectedCat, setselectedCat] = useState(0);
-    const [selectedSub, setselectedSub] = useState(0);
+export default function Ticket() {
+  const [ticket, setTicket] = useState<any>(0);
+  const { ticketId } = useParams();
+  const navigate = useNavigate();
+  const [requestPending, setRequestPending] = useState(false)
+  const [notes, setNotes] = useState<any>([])
+  const merchantInfoRef = useRef<any>(null);
+  const categoriesRef = useRef<any>(null)
+  const departmentRef = useRef<any>(null)
+  const [statusChange, setStatusChange] = useState<string>("")
 
-    const created = Date.now;
+  useEffect(() => {
+    if (ticketId!=="new") {
+      fetch(`/tickets/${ticketId}`)
+        .then((response) => {
+          if(response.status === 404) navigate('/404')
+          return response.json()
+        })
+        .then((data) => {
+          setTicket(data);
+          setNotes(data.ticketBody?.notes)
+          setStatusChange(data.ticketInfo?.ticketStatus)
+        });
+    }else{
+      setTicket(0);
+      setNotes([])
+      setStatusChange("open")
+      navigate('/tickets/new')
+      
+    }
+    // eslint-disable-next-line
+  }, [ticketId]);
+
+  const createTicketHandler = (e) => {
+    e.preventDefault();
+
+    const merchantInfo = merchantInfoRef.current?.getData();
+    const categories = categoriesRef.current?.getData();
+    const department = departmentRef.current?.getData();
+    const formData = new FormData(e.target);
+    const jsonObject = {
+      ticketStatus: statusChange,
+      ticketBody: {
+        notes:notes
+      },
+      ticketInfo: {
+        createdDate: ticket.ticketInfo?.createdDate
+      },
+      ...department,
+      ...categories,
+      ...merchantInfo
+    };
+
+    console.log(jsonObject)
+
+    for (const [key, value] of formData.entries()) {
+      const keys = key.split("/");
+      jsonObject[keys[0]][keys[1]] = value;
+    }
+
+    if(!ticket){
+      setRequestPending(true)
+      fetch("/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonObject),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          navigate(`/tickets/${data.ticketId}`);
+          setRequestPending(false)
+          console.log(data)
+        }).catch(
+          error => console.log(error)
+        );
+    }else{
+      setRequestPending(true)
+      fetch(`/tickets/${ticket.ticketId}`,{
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonObject),
+      }).then(
+        response => response.json()
+      ).then(
+        data => {
+          setTicket(data)
+          setRequestPending(false)
+          console.log(data)
+        }
+      ).catch(
+        error => console.log(error)
+      )
+    }
+  };
+
+  const textareaRef = React.useRef<any>(null);
+
+  function handleAddNote() {
+    
+    const noteText = textareaRef.current?.value;
+    if(!noteText) return
+    const noteObject = {
+      text: noteText,
+      addedBy: "Lukas Kondrotas",
+      timestamp: new Date()
+    }
+    if(!ticket){
+      setNotes((prevState)=>[...prevState, noteObject])
+      textareaRef.current.value = ""
+    }else{
+      fetch(`/tickets/addnote/${ticketId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({notes:noteObject}),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setNotes([...notes, noteObject])
+          setTicket(data)
+          textareaRef.current.value = ""
+        }).catch(
+          error => console.log(error)
+        );
+    }
+  }
+
   
-      return (
-        <Container fluid as={Form}>
-          <Row>
-            <MerchantInfo />
-            <Col style={{ padding: "67px 0px 0px 0px" }}>
-              <Container fluid>
-                <Row className="overflow-auto pt-2" style={{ maxHeight: "92vh" }}>
-                  <Form.Group className="pt-3 rounded mb-5">
-                    <InputGroup className="mb-2">
-                      <InputGroup.Text className="ig-width">
-                        Subject
-                      </InputGroup.Text>
-                      <Form.Control
-                        placeholder="Subject"
-                        value={ticketData.ticketData ? ticketData.ticketData.subject : null}
-                      ></Form.Control>
-                    </InputGroup>
-                    <InputGroup className="mb-2">
-                      <InputGroup.Text className="ig-width">
-                        Description
-                      </InputGroup.Text>
-                      <Form.Control
-                        as="textarea"
-                        placeholder="Write description of the issue here..."
-                        style={{ minHeight: "300px", maxHeight: "600px" }}
-                      ></Form.Control>
-                    </InputGroup>
-                    <InputGroup className="mb-2">
-                      <InputGroup.Text className="ig-width">
-                        Date and time
-                      </InputGroup.Text>
-                      <Form.Control
-                        placeholder=""
-                      ></Form.Control>
-                    </InputGroup>
-                    <InputGroup className="mb-2">
-                      <InputGroup.Text className="ig-width">
-                        Error message
-                      </InputGroup.Text>
-                      <Form.Control
-                        placeholder="Error message"
-                      ></Form.Control>
-                    </InputGroup>
-                    <InputGroup className="mb-2">
-                      <InputGroup.Text className="ig-width">
-                        Action plan
-                      </InputGroup.Text>
-                      <Form.Control
-                        as="textarea"
-                        placeholder="Action plan"
-                        style={{ minHeight: "70px", maxHeight: "200px" }}
-                      ></Form.Control>
-                    </InputGroup>
-                  </Form.Group>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text className="ig-width">
-                      Solution
-                    </InputGroup.Text>
-                    <Form.Control
-                      as="textarea"
-                      placeholder="Write solution how you fixed this issue..."
-                      style={{ minHeight: "100px", maxHeight: "200px" }}
-                    ></Form.Control>
-                  </InputGroup>
-                  <Form.Group>
-                    <Form.Text>Notes</Form.Text>
-                    <InputGroup>
-                      <Form.Control
-                        as="textarea"
-                        style={{ minHeight: "150px" }}
-                      ></Form.Control>
-                      <Button>Add Note</Button>
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-              </Container>
-            </Col>
-            <Col xl={2} xs={3} className="vh-100 bg-secondary shadow-sm">
-              <div style={{ height: "80px" }}></div>
-              <Form.Group className="mb-2">
-                <Form.Text style={{ color: "#fff" }}>
-                  Ticket Information
-                </Form.Text>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Created
-                  </InputGroup.Text>
-                  <Form.Control as="text"></Form.Control>
-                </InputGroup>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Updated
-                  </InputGroup.Text>
-                  <Form.Control as="text"></Form.Control>
-                </InputGroup>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Source
-                  </InputGroup.Text>
-                  <Form.Control as="select">
-                    <option>Phone</option>
-                    <option>Chat</option>
-                    <option>Email</option>
-                  </Form.Control>
-                </InputGroup>
-              </Form.Group>
-              <Form.Group>
-                <Form.Text style={{ color: "#fff" }}>
-                  Department and asignee
-                </Form.Text>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Created
-                  </InputGroup.Text>
-                  <Form.Control as="text"></Form.Control>
-                </InputGroup>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Dept
-                  </InputGroup.Text>
-                  <Form.Control as="select">
-                    <option>Advance Support</option>
-                    <option>Customer Service</option>
-                    <option>Technical Services</option>
-                  </Form.Control>
-                </InputGroup>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Dept
-                  </InputGroup.Text>
-                  <Form.Control as="select">
-                    <option>AS POS/PMS</option>
-                    <option>AS Advanced</option>
-                    <option>AS Audit</option>
-                  </Form.Control>
-                </InputGroup>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Asignee
-                  </InputGroup.Text>
-                  <Form.Control as="select">
-                    <option>Lukas Kondrotas</option>
-                    <option>Donatas Ladyas</option>
-                    <option>Vardenis Pavardenis</option>
-                  </Form.Control>
-                </InputGroup>
-              </Form.Group>
-  
-              {/* Problem categories */}
-              <Form.Group className="mb-5">
-                <Form.Text style={{ color: "#fff" }}>Problem category</Form.Text>
-                <InputGroup className="mb-1">
-                  <InputGroup.Text className="ig-width-side">
-                    Request type
+
+  return (
+    <Container fluid as={Form} onSubmit={createTicketHandler}>
+      <Row>
+        <MerchantInfo ref={merchantInfoRef} serial={ticket.merchant?.SN} reporterData={ticket?.reporter}/>
+        <Col style={{ padding: "67px 0px 0px 0px" }}>
+          <Container fluid>
+            <Row className="overflow-auto pt-2" style={{ maxHeight: "92vh" }}>
+              <Form.Group className="pt-3 rounded mb-5">
+                <InputGroup className="mb-2">
+                  <InputGroup.Text className="ig-width">
+                    Subject
                   </InputGroup.Text>
                   <Form.Control
-                    as="select"
-                    id="reqtype"
-                    onChange={(e) => {
-                        setselectedReq(Number(e.target.value));
-                        setselectedProd(0);
-                        setselectedSub(0);
-                        setselectedCat(0);
-                    }
-                    }
-                  >
-                    <option value={0} label="Select"></option>
-                    {probcat.requestType.map((item) => (
-                      <option value={item.id} label={item.name}></option>
-                    ))}
-                  </Form.Control>
+                    placeholder="Subject"
+                    name="ticketBody/subject"
+                    defaultValue={ticket.ticketBody?.subject}
+                    required
+                  ></Form.Control>
                 </InputGroup>
-                {selectedReq ? (
-                  <InputGroup className="mb-1">
-                    <InputGroup.Text className="ig-width-side">
-                      Product
-                    </InputGroup.Text>
-                    <Form.Control
-                      as="select"
-                      onChange={(e) => {
-                          setselectedProd(Number(e.target.value));
-                          setselectedSub(0);
-                          setselectedCat(0);
-                        }
-                      }
-                    >
-                      <option value={0} label="Select"></option>
-                      {probcat.product.map((item) =>
-                        selectedReq === item.idf ? (
-                          <option value={item.id} label={item.name}>
-                            {item.name}
-                          </option>
-                        ) : (
-                          ""
-                        )
-                      )}
-                    </Form.Control>
-                  </InputGroup>
-                ) : (
-                  ""
-                )}
-                {selectedProd ? (
-                  <InputGroup className="mb-1">
-                    <InputGroup.Text className="ig-width-side">
-                      Category
-                    </InputGroup.Text>
-                    <Form.Control
-                      as="select"
-                      id="category"
-                      onChange={(e) => {
-                          setselectedCat(Number(e.target.value));
-                          setselectedSub(0);
-                        }
-                      }
-                    >
-                      <option value={0} label="Select"></option>
-                      {probcat.category.map((item) =>
-                        selectedProd === item.idf ? (
-                          <option value={item.id} label={item.name}>
-                            {item.name}
-                          </option>
-                        ) : (
-                          ""
-                        )
-                      )}
-                    </Form.Control>
-                  </InputGroup>
-                ) : (
-                  ""
-                )}
-                {selectedCat ? (
-                  <InputGroup className="mb-1">
-                    <InputGroup.Text className="ig-width-side">
-                      Subcategory
-                    </InputGroup.Text>
-                    <Form.Control as="select" id="subcat">
-                      <option value={0} label="Select"></option>
-                      {probcat.subcategory.map((item) =>
-                        selectedCat === item.idf ? (
-                          <option value={item.id} label={item.name}>
-                            {item.name}
-                          </option>
-                        ) : (
-                          ""
-                        )
-                      )}
-                    </Form.Control>
-                  </InputGroup>
-                ) : (
-                  ""
-                )}
+                <InputGroup className="mb-2">
+                  <InputGroup.Text className="ig-width">
+                    Description
+                  </InputGroup.Text>
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Write description of the issue here..."
+                    style={{ minHeight: "300px", maxHeight: "600px" }}
+                    name="ticketBody/description"
+                    defaultValue={ticket.ticketBody?.description}
+                    required
+                  ></Form.Control>
+                </InputGroup>
+                <InputGroup className="mb-2">
+                  <InputGroup.Text className="ig-width">
+                    Error message
+                  </InputGroup.Text>
+                  <Form.Control
+                    placeholder="Error message"
+                    name="ticketBody/errorMessage"
+                    defaultValue={ticket.ticketBody?.errorMessage}
+                  ></Form.Control>
+                </InputGroup>
+                <InputGroup className="mb-2">
+                  <InputGroup.Text className="ig-width">
+                    Action plan
+                  </InputGroup.Text>
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Action plan"
+                    style={{ minHeight: "70px", maxHeight: "200px" }}
+                    name="ticketBody/actionPlan"
+                    defaultValue={ticket.ticketBody?.actionPlan}
+                  ></Form.Control>
+                </InputGroup>
               </Form.Group>
-              <Button type="submit" className="col-12 btn-lg">
-                Create ticket
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      );
-    }
-  
-  export default Ticket;
-  
+              <InputGroup className="mb-3">
+                <InputGroup.Text className="ig-width">
+                  Solution
+                </InputGroup.Text>
+                <Form.Control
+                  as="textarea"
+                  placeholder="Write solution how you fixed this issue..."
+                  style={{ minHeight: "100px", maxHeight: "200px" }}
+                  name="ticketBody/solution"
+                  defaultValue={ticket.ticketBody?.solution}
+                ></Form.Control>
+              </InputGroup>
+              <Form.Text><b>Notes</b></Form.Text>
+              <ul>
+                {notes ? notes.map((note, i)=>{
+                  return note ? <><Form.Text key={i}>{note.addedBy + " · " + moment(note.timestamp).format("YYYY-MM-DD h:mmA")}</Form.Text>
+                    <p
+                      className="border-0 border-bottom rounded-0 pb-2"
+                    >{note.text}</p>
+                  </> : ""
+                }) : ""}
+              </ul>
+              <Form.Group>
+                <InputGroup>
+                  <Form.Control
+                    as="textarea"
+                    style={{ minHeight: "150px" }}
+                    ref={textareaRef}
+                  ></Form.Control>
+                  <Button onClick={handleAddNote}>Add Note</Button>
+                </InputGroup>
+              </Form.Group>
+            </Row>
+          </Container>
+        </Col>
+        <Col xl={2} xs={3} className="vh-100 bg-secondary shadow-sm">
+          <div style={{ height: "80px" }}></div>
+          <h5>{`#${ticket ? ticket.ticketId : " New ticket"}`}</h5>
+          <Form.Group className="mb-2">
+            <Form.Group>
+              <InputGroup className="mb-1">
+                <InputGroup.Text
+                  className={
+                    statusChange === "open" ? "ig-width-side border-danger bg-danger"
+                      : statusChange === "resolved" ? "ig-width-side border-success bg-success"
+                      : statusChange === "waiting" ? "ig-width-side border-warning bg-warning" : "ig-width-side"
+                  }
+                >
+                  Status
+                </InputGroup.Text>
+                <Form.Control className={
+                      statusChange === "open" ? "border-danger"
+                        : statusChange === "resolved" ? "border-success"
+                        : statusChange === "waiting" ? "border-warning" : ""
+                    } 
+                    as="select"
+                    name="ticketInfo/ticketStatus"
+                    value={statusChange}
+                    onChange={(e)=>setStatusChange(e.target.value)}
+                  >
+                  <option value="open">Open</option>
+                  <option value="resolved">Resolved</option>
+                  <option value="waiting">Waiting for customer</option>
+                </Form.Control>
+              </InputGroup>
+            </Form.Group>
+            <Form.Text style={{ color: "#fff" }}>
+              Ticket Information
+            </Form.Text>
+            <InputGroup className="mb-1">
+              <InputGroup.Text className="ig-width-side p-1" style={{fontSize: "12px"}}>
+                Created
+              </InputGroup.Text>
+              <Form.Control defaultValue={ticket!==0 ? moment(ticket.ticketInfo?.createdDate).format("YYYY-MM-DD h:mmA") : ""} readOnly></Form.Control>
+            </InputGroup>
+            <InputGroup className="mb-1">
+              <InputGroup.Text className="ig-width-side p-1" style={{fontSize: "12px"}}>
+                Updated
+              </InputGroup.Text>
+              <Form.Control defaultValue={ticket!==0 ? moment(ticket.ticketInfo?.updatedDate).format("YYYY-MM-DD h:mmA") : ""} readOnly></Form.Control>
+            </InputGroup>
+            <InputGroup className="mb-1">
+              <InputGroup.Text className="ig-width-side p-1" style={{fontSize: "12px"}}>
+                Source
+              </InputGroup.Text>
+              <Form.Control as="select" name="ticketInfo/source" defaultValue={ticket.ticketInfo?.source}>
+                <option>Phone</option>
+                <option>Chat</option>
+                <option>Email</option>
+              </Form.Control>
+            </InputGroup>
+          </Form.Group>
+          <Form.Group>
+            <DepartmentSelect ref={departmentRef} savedDepartments={ticket?.departmentInfo} />
+          </Form.Group>
+
+          {/* Problem categories */}
+          <Form.Group className="mb-5">
+            <CategorySelect ref={categoriesRef} savedCategories={ticket?.categories}/>
+          </Form.Group>
+          <Button type="submit" className="col-12 btn-lg">
+            {ticket ? requestPending ? "Saving..." : "Save Ticket" : requestPending ? "Saving..." : "Create Ticket"}
+          </Button>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
