@@ -46,9 +46,6 @@ class NavTop extends React.Component {
               <Dropdown.Menu variant="dark">
                 <Dropdown.Header>{this.state.userFullName}</Dropdown.Header>
                 <Dropdown.Divider />
-                <Dropdown.Item as={Link} to="profile">
-                  Profile
-                </Dropdown.Item>
                 <Dropdown.Item href="#">Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

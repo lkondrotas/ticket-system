@@ -5,8 +5,13 @@
       "href": "/"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "My tickets",
       "href": "/mytickets"
+    },
+    {
+      "id": 3,
+      "name": "Statistics",
+      "href": "/stats"
     }
   ]

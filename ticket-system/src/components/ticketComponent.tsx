@@ -66,8 +66,6 @@ export default function Ticket() {
       ...merchantInfo
     };
 
-    console.log(jsonObject)
-
     for (const [key, value] of formData.entries()) {
       const keys = key.split("/");
       jsonObject[keys[0]][keys[1]] = value;
@@ -86,7 +84,6 @@ export default function Ticket() {
         .then((data) => {
           navigate(`/tickets/${data.ticketId}`);
           setRequestPending(false)
-          console.log(data)
         }).catch(
           error => console.log(error)
         );
@@ -104,7 +101,6 @@ export default function Ticket() {
         data => {
           setTicket(data)
           setRequestPending(false)
-          console.log(data)
         }
       ).catch(
         error => console.log(error)

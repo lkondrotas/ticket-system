@@ -1,7 +1,7 @@
 {
   "name": "ticket-system",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
+  "proxy": "http://server:5000",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
@@ -21,7 +21,6 @@
     "react-scripts": "4.0.3",
     "react-select": "^5.7.3",
     "react-table": "^7.7.0",
-    "react-table-6": "^6.11.0",
     "react-transition-group": "^4.4.2",
     "typescript": "^4.5.4",
     "web-vitals": "^1.1.2"

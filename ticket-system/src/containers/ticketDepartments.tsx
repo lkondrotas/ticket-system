@@ -10,16 +10,18 @@ const DepartmentSelect = forwardRef((props: any, ref) => {
     const { savedDepartments } = props
 
     useEffect(() => {
-        fetch(`/departments`)
-            .then(response => response.json())
-            .then(data => setDepartments(data))
+        if(!savedDepartments){
+            fetch(`/departments`)
+                .then(response => response.json())
+                .then(data => setDepartments(data))
 
-        fetch('/users/allusers')
-            .then(response=>response.json())
-            .then(data=>{
-                setUsers(data)
-                setSelected({...selected, reporter: data[0]})
-            })
+            fetch('/users/allusers')
+                .then(response=>response.json())
+                .then(data=>{
+                    setUsers(data)
+                    setSelected({...selected, reporter: data[0]})
+                })
+        }
             // eslint-disable-next-line
     },[])
 
@@ -35,7 +37,6 @@ const DepartmentSelect = forwardRef((props: any, ref) => {
 
     useImperativeHandle(ref, () => ({
         getData: () => {
-            console.log(selected)
           return { departmentInfo: selected };
         },
     }));

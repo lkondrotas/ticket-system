@@ -4,6 +4,10 @@
     "accessor": "ticketId"
   },
   {
+    "Header": "Account Number",
+    "accessor": "accountNumber"
+  },
+  {
     "Header": "Subject",
     "accessor": "subject"
   },
